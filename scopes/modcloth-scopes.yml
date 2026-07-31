@@ -1,0 +1,25 @@
+generated: '2026-07-20'
+method: searched
+source: https://modcloth.com/.well-known/openid-configuration
+docs: https://modcloth.com/.well-known/oauth-authorization-server
+schemes:
+- name: shopify-customer-account-oidc
+  issuer: https://shopify.com/authentication/55906042027
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://account.modcloth.com/authentication/oauth/authorize
+    tokenUrl: https://account.modcloth.com/authentication/oauth/token
+    pkce: S256
+scopes:
+- scope: openid
+  description: OpenID Connect — issue an ID token for the authenticated shopper.
+  flows: [authorizationCode]
+- scope: email
+  description: Access the shopper's email address and email_verified claim.
+  flows: [authorizationCode]
+- scope: customer-account-api:full
+  description: Full access to the Shopify Customer Account API for the signed-in shopper (orders, profile, addresses).
+  flows: [authorizationCode]
+- scope: customer-account-mcp-api:full
+  description: Full access to the Customer Account MCP API — agent access to the shopper's account context.
+  flows: [authorizationCode]

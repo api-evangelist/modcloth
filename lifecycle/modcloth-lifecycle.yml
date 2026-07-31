@@ -1,0 +1,19 @@
+generated: '2026-07-20'
+method: searched
+source: https://modcloth.com/.well-known/ucp
+versioning:
+  scheme: dated
+  current: '2026-04-08'
+  supported: ['2026-04-08', '2026-01-23']
+  docs: https://ucp.dev/2026-04-08/specification/overview/
+  note: >-
+    UCP protocol versions are date-stamped and negotiated via the merchant
+    profile at /.well-known/ucp (supported_versions map).
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No explicit deprecation/Sunset policy published for the store surface.
+sla:
+  url: null
+status_page: null
+deprecated_operations: []

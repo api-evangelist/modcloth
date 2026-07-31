@@ -1,22 +1,69 @@
 aid: modcloth
 name: Modcloth
-description: 'Modcloth is a company surfaced as a portfolio company of norwest-venture-partners and added
-  to the API Evangelist network as a stub for enrichment. Sector: unknown. This profile is a lead awaiting
-  the enrichment pipeline.'
+description: >-
+  Modcloth is a vintage-inspired, indie and retro women's fashion retailer selling
+  dresses, apparel, footwear, and accessories through its Shopify-hosted online store
+  at modcloth.com. Surfaced as a portfolio company of Norwest Venture Partners, the
+  store exposes a real agent-facing commerce surface: a Universal Commerce Protocol
+  (UCP) shopping service over an MCP endpoint, Shopify customer-account OAuth 2.0 /
+  OpenID Connect, published /llms.txt and /agents.md agent instructions, and read-only
+  Shopify Storefront JSON for catalog and collections. Checkout requires contemporaneous
+  buyer approval.
 url: https://raw.githubusercontent.com/api-evangelist/modcloth/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - norwest-venture-partners
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: profiled
+x-tier-reason: agent-commerce-surface
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 15
+  pass: local-v1
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
+image: https://modcloth.com/cdn/shop/files/ModCloth_Logo_1200x628_15dc462f-196f-49fb-a86d-79841942351e.jpg?v=1750463087
 tags:
 - Company
-- Unknown
-apis: []
+- Retail
+- E-commerce
+- Fashion
+- Apparel
+- Shopify
+- Agentic Commerce
+- MCP
+apis:
+- name: Modcloth UCP Agentic Commerce (MCP)
+  description: >-
+    Universal Commerce Protocol shopping service exposed over MCP — search the
+    catalog, build a cart, and run a buyer-approved checkout.
+  humanURL: https://modcloth.com/agents.md
+  baseURL: https://modcloth.com/api/ucp/mcp
+  properties:
+  - type: MCPServer
+    url: mcp/modcloth-mcp.yml
+  - type: WellKnown
+    url: well-known/modcloth-ucp.json
+- name: Modcloth Storefront JSON (read-only)
+  description: >-
+    Read-only Shopify Storefront JSON for products, collections, and search —
+    no authentication required.
+  humanURL: https://modcloth.com/llms.txt
+  baseURL: https://modcloth.com
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -25,3 +72,31 @@ maintainers:
 common:
 - type: Website
   url: https://modcloth.com
+- type: Documentation
+  url: https://modcloth.com/agents.md
+- type: MCPServer
+  url: mcp/modcloth-mcp.yml
+- type: AgentSkill
+  url: skills/modcloth-agentic-shopping.md
+- type: LLMsTxt
+  url: llms/modcloth-llms.txt
+- type: WellKnown
+  url: well-known/modcloth-well-known.yml
+- type: Authentication
+  url: authentication/modcloth-authentication.yml
+- type: OAuthScopes
+  url: scopes/modcloth-scopes.yml
+- type: Conventions
+  url: conventions/modcloth-conventions.yml
+- type: Conformance
+  url: conformance/modcloth-conformance.yml
+- type: Lifecycle
+  url: lifecycle/modcloth-lifecycle.yml
+- type: DomainSecurity
+  url: security/modcloth-domain-security.yml
+- type: Login
+  url: https://account.modcloth.com
+- type: TermsOfService
+  url: https://modcloth.com/policies/terms-of-service
+- type: PrivacyPolicy
+  url: https://modcloth.com/policies/privacy-policy

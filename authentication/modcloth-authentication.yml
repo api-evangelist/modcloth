@@ -1,0 +1,39 @@
+generated: '2026-07-20'
+method: searched
+source: https://modcloth.com/.well-known/openid-configuration
+docs: https://modcloth.com/.well-known/oauth-authorization-server
+summary:
+  types: [oauth2, openIdConnect]
+  oauth2_flows: [authorizationCode, refreshToken, jwt-bearer]
+  pkce: S256
+  notes: >-
+    Two distinct auth surfaces. (1) Agent commerce over UCP/MCP at
+    /api/ucp/mcp — public catalog/cart tools, buyer-approved checkout, agent
+    identity via a UCP profile URI. (2) Customer-account OAuth 2.0 / OpenID
+    Connect provided by Shopify (issuer https://shopify.com/authentication/55906042027)
+    for authenticated shopper sessions and the Customer Account API/MCP.
+    Read-only storefront JSON (products.json, collections) needs no auth.
+schemes:
+- name: shopify-customer-account-oidc
+  type: openIdConnect
+  openIdConnectUrl: https://modcloth.com/.well-known/openid-configuration
+  issuer: https://shopify.com/authentication/55906042027
+  authorization_endpoint: https://account.modcloth.com/authentication/oauth/authorize
+  token_endpoint: https://account.modcloth.com/authentication/oauth/token
+  jwks_uri: https://account.modcloth.com/authentication/.well-known/jwks.json
+  end_session_endpoint: https://account.modcloth.com/authentication/logout
+  grant_types: [authorization_code, refresh_token, "urn:ietf:params:oauth:grant-type:jwt-bearer"]
+  response_types: [code]
+  token_endpoint_auth_methods: [client_secret_basic]
+  code_challenge_methods: [S256]
+  id_token_signing_alg: [RS256]
+  scopes_supported: [openid, email, "customer-account-api:full", "customer-account-mcp-api:full"]
+  source: well-known/modcloth-openid-configuration.json
+- name: ucp-agent-commerce
+  type: application
+  transport: mcp
+  endpoint: https://modcloth.com/api/ucp/mcp
+  note: >-
+    UCP shopping service. Catalog/cart operations are open; checkout
+    completion requires contemporaneous buyer approval (human-in-the-loop).
+  source: well-known/modcloth-ucp.json

@@ -1,0 +1,31 @@
+generated: '2026-07-20'
+method: searched
+source: live probes of https://modcloth.com/.well-known/*
+host: https://modcloth.com
+documents:
+- path: /.well-known/ucp
+  status: 200
+  file: modcloth-ucp.json
+  note: Universal Commerce Protocol (UCP) merchant profile — versions, service endpoints, capabilities, payment handlers
+- path: /.well-known/openid-configuration
+  status: 200
+  file: modcloth-openid-configuration.json
+  note: OpenID Connect discovery (Shopify customer accounts; issuer https://shopify.com/authentication/55906042027)
+- path: /.well-known/oauth-authorization-server
+  status: 200
+  file: modcloth-oauth-authorization-server.json
+  note: RFC 8414 OAuth 2.0 authorization-server metadata (same Shopify customer-account issuer)
+- path: /.well-known/security.txt
+  status: 404
+- path: /.well-known/api-catalog
+  status: 404
+- path: /.well-known/ai-plugin.json
+  status: 404
+# Agent-facing docs (not under /.well-known/ but part of the discovery surface)
+agent_docs:
+- path: /llms.txt
+  status: 200
+  file: ../llms/modcloth-llms.txt
+- path: /agents.md
+  status: 200
+  file: modcloth-agents.md

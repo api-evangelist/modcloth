@@ -1,0 +1,59 @@
+generated: '2026-07-20'
+method: searched
+status: published
+source: https://modcloth.com/agents.md
+discovery: https://modcloth.com/.well-known/ucp
+server:
+  name: modcloth-ucp-shopping
+  protocol: Universal Commerce Protocol (UCP)
+  transport: http
+  url: https://modcloth.com/api/ucp/mcp
+  method: POST
+  content_type: application/json
+  auth: >-
+    Public catalog/cart tools are open; checkout completion requires
+    buyer approval. Agent identity is supplied via a UCP agent profile
+    URI (the endpoint returns invalid_profile_url without one).
+  versions:
+  - '2026-04-08'
+  - '2026-01-23'
+  spec: https://ucp.dev/2026-04-08/specification/overview/
+  schema: https://ucp.dev/2026-04-08/services/shopping/mcp.openrpc.json
+notes: >-
+  Modcloth is a Shopify store exposing the UCP shopping service over MCP.
+  Tool names below are the documented agent flow from /agents.md and the
+  UCP capability set advertised at /.well-known/ucp; exact JSON schemas are
+  published by UCP at ucp.dev (linked per tool). Checkout must not be
+  completed without contemporaneous buyer approval.
+tools:
+- name: search_catalog
+  description: Search the store catalog for products matching a buyer intent.
+  capability: dev.ucp.shopping.catalog.search
+  schema: https://ucp.dev/2026-04-08/schemas/shopping/catalog_search.json
+- name: lookup_catalog
+  description: Look up specific products/variants by identifier.
+  capability: dev.ucp.shopping.catalog.lookup
+  schema: https://ucp.dev/2026-04-08/schemas/shopping/catalog_lookup.json
+- name: create_cart
+  description: Create a cart and add desired items.
+  capability: dev.ucp.shopping.cart
+  schema: https://ucp.dev/2026-04-08/schemas/shopping/cart.json
+- name: create_checkout
+  description: Start the purchase (checkout) flow for a cart.
+  capability: dev.ucp.shopping.checkout
+  schema: https://ucp.dev/2026-04-08/schemas/shopping/checkout.json
+- name: update_checkout
+  description: Set shipping address, shipping method, and discounts on a checkout.
+  capability: dev.ucp.shopping.fulfillment
+  schema: https://ucp.dev/2026-04-08/schemas/shopping/fulfillment.json
+- name: complete_checkout
+  description: Finalize the purchase. Buyer MUST approve payment.
+  capability: dev.ucp.shopping.checkout
+  human_in_the_loop: required
+payment_handlers:
+- id: gpay
+  provider: com.google.pay
+- id: shopify.card
+  provider: dev.shopify.card
+- id: shop_pay
+  provider: dev.shopify.shop_pay

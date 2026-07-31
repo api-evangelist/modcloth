@@ -1,0 +1,45 @@
+generated: '2026-07-20'
+method: searched
+source: https://modcloth.com/agents.md
+about: >-
+  Cross-cutting agent-commerce conventions for the Modcloth Shopify store,
+  captured from /agents.md, /llms.txt, and the UCP profile at /.well-known/ucp.
+authentication:
+  style: >-
+    UCP/MCP for transactions (buyer-approved), Shopify customer-account OAuth/OIDC
+    for authenticated sessions, no auth for read-only storefront JSON.
+  see: authentication/modcloth-authentication.yml
+buyer_approval:
+  invariant: >-
+    Checkout MUST NOT be completed without contemporaneous, explicit buyer
+    approval at the moment of payment. Agents lacking approval should route
+    through Shop Pay via the Shop skill (https://shop.app/SKILL.md) instead.
+  human_in_the_loop: required-for-payment
+rate_limiting:
+  signal: HTTP 429
+  policy: The UCP MCP endpoint is rate-limited per IP; back off on 429 responses.
+context_parameters:
+  - name: context.address_country
+    purpose: Accurate pricing and availability by destination.
+  - name: context.currency
+    purpose: Currency for pricing.
+pagination:
+  style: shopify-storefront
+  note: >-
+    Read-only product/collection JSON follows Shopify conventions
+    (e.g. products.json?limit=&page= / cursor via Link headers).
+versioning:
+  scheme: dated
+  current: '2026-04-08'
+  supported: ['2026-04-08', '2026-01-23']
+  negotiation: Pass the UCP protocol version; server advertises supported_versions at /.well-known/ucp.
+  see: lifecycle/modcloth-lifecycle.yml
+read_only_surface:
+  - GET /collections/all
+  - GET /products/{handle}.json
+  - GET /collections/{handle}/products.json
+  - GET /search?q={query}&type=product
+  - GET /sitemap.xml
+idempotency:
+  supported: false
+  note: No idempotency-key contract is documented for the storefront/UCP surface.

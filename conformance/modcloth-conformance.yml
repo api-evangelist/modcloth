@@ -1,0 +1,28 @@
+generated: '2026-07-20'
+method: searched
+source: >-
+  https://modcloth.com/.well-known/ucp,
+  https://modcloth.com/.well-known/openid-configuration,
+  https://modcloth.com/.well-known/oauth-authorization-server
+standards:
+- id: oauth2
+  conforms: true
+  evidence: RFC 8414 authorization-server metadata published; authorizationCode + refresh_token + jwt-bearer grants
+- id: oidc
+  conforms: true
+  evidence: OpenID Connect discovery document at /.well-known/openid-configuration (RS256, PKCE S256)
+- id: pkce
+  conforms: true
+  evidence: code_challenge_methods_supported includes S256
+- id: ucp
+  conforms: true
+  evidence: Universal Commerce Protocol merchant profile at /.well-known/ucp (versions 2026-04-08, 2026-01-23)
+- id: mcp
+  conforms: true
+  evidence: UCP shopping service exposed over MCP at /api/ucp/mcp
+- id: llms-txt
+  conforms: true
+  evidence: /llms.txt and /agents.md agent-instruction documents published
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: no application/problem+json error surface documented

@@ -1,0 +1,8 @@
+generated: '2026-07-20'
+method: generated
+source: https://modcloth.com/agents.md
+skills:
+- file: modcloth-agentic-shopping.md
+  name: Shop Modcloth as an agent (UCP)
+  api: mcp/modcloth-mcp.yml
+  operations: [search_catalog, lookup_catalog, create_cart, create_checkout, update_checkout, complete_checkout]
