@@ -10,21 +10,17 @@ server:
   url: https://modcloth.com/api/ucp/mcp
   method: POST
   content_type: application/json
-  auth: >-
-    Public catalog/cart tools are open; checkout completion requires
-    buyer approval. Agent identity is supplied via a UCP agent profile
-    URI (the endpoint returns invalid_profile_url without one).
+  auth: Public catalog/cart tools are open; checkout completion requires buyer approval. Agent identity
+    is supplied via a UCP agent profile URI (the endpoint returns invalid_profile_url without one).
   versions:
   - '2026-04-08'
   - '2026-01-23'
   spec: https://ucp.dev/2026-04-08/specification/overview/
   schema: https://ucp.dev/2026-04-08/services/shopping/mcp.openrpc.json
-notes: >-
-  Modcloth is a Shopify store exposing the UCP shopping service over MCP.
-  Tool names below are the documented agent flow from /agents.md and the
-  UCP capability set advertised at /.well-known/ucp; exact JSON schemas are
-  published by UCP at ucp.dev (linked per tool). Checkout must not be
-  completed without contemporaneous buyer approval.
+notes: Modcloth is a Shopify store exposing the UCP shopping service over MCP. Tool names below are the
+  documented agent flow from /agents.md and the UCP capability set advertised at /.well-known/ucp; exact
+  JSON schemas are published by UCP at ucp.dev (linked per tool). Checkout must not be completed without
+  contemporaneous buyer approval.
 tools:
 - name: search_catalog
   description: Search the store catalog for products matching a buyer intent.
@@ -57,3 +53,11 @@ payment_handlers:
   provider: dev.shopify.card
 - id: shop_pay
   provider: dev.shopify.shop_pay
+deployment:
+  mode: remote
+  endpoint: https://modcloth.com/api/ucp/mcp
+  verified: probed
+  probe: live
+  tools: 13
+  checked: '2026-08-12'
+  source: catalog MCP census
