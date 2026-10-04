@@ -78,12 +78,17 @@ apis:
     url: mcp/modcloth-mcp.yml
   - type: WellKnown
     url: well-known/modcloth-ucp.json
+  x-surface: platform-generated
+  x-platform: shopify
+  x-platform-surface: ucp
 - name: Modcloth Storefront JSON (read-only)
   description: >-
     Read-only Shopify Storefront JSON for products, collections, and search —
     no authentication required.
   humanURL: https://modcloth.com/llms.txt
-  baseURL: https://modcloth.com
+  x-surface: platform-generated
+  x-platform: shopify
+  x-platform-surface: storefront-json
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
